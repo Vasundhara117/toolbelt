@@ -179,6 +179,14 @@ describe("toYAML quotes strings YAML would read as other types", () => {
     ["=", '"="'],
     ["<<", '"<<"'],
     ["2001-1-1 1:00:00", '"2001-1-1 1:00:00"'],
+    ["1__000", '"1__000"'],
+    ["1000_", '"1000_"'],
+    ["1.0_0", '"1.0_0"'],
+    [".5_0", '".5_0"'],
+    ["0b_101", '"0b_101"'],
+    ["0b101_", '"0b101_"'],
+    ["1_0:30", '"1_0:30"'],
+    ["1:30.", '"1:30."'],
   ])("quotes %s", (input, expected) => {
     const out = toYAML(JSON.stringify({ a: input }));
     expect(out.ok).toBe(true);

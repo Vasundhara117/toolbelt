@@ -346,16 +346,17 @@ function needsQuote(s: string): boolean {
   if (/^-?\d+(\.\d+)?([eE][+-]?\d+)?$/.test(s)) return true;
   if (/^[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?$/.test(s)) return true;
   if (/^[+-]?0([xX][0-9a-fA-F]+|[oO][0-7]+)$/.test(s)) return true;
-  if (/^[+-]?\d+(?::[0-5]?\d)+(?:\.\d+)?$/.test(s)) return true;
-  if (/^[+-]?\d+(?:_\d+)+(?:\.\d+)?(?:[eE][+-]?\d+)?$/.test(s)) return true;
+  if (/^[+-]?\d[\d_]*(?::[0-5]?\d[\d_]*)+(?:\.[\d_]*)?$/.test(s)) return true;
+  if (/^[+-]?(?:\d[\d_]*(?:\.[\d_]*)?|\.\d[\d_]*)(?:[eE][+-]?\d[\d_]*)?$/.test(s)) return true;
   if (/^[+-]?0[xX][0-9a-fA-F_]*_[0-9a-fA-F_]*$/.test(s)) return true;
-  if (/^[+-]?0[bB][01]+(?:_[01]+)*$/.test(s)) return true;
+  if (/^[+-]?0[bB][01_]+$/.test(s)) return true;
   if (/^[+-]?\.(inf|nan)$/i.test(s)) return true;
   if (/^\d{4}-\d{1,2}-\d{1,2}(?:[Tt ].*)?$/.test(s)) return true;
   if (/[:#]\s|\s#/.test(s)) return true;
   if (/[\n\t\r"]/.test(s)) return true;
   return false;
 }
+
 
 function yamlString(s: string): string {
   if (!needsQuote(s)) return s;
